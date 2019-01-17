@@ -1,35 +1,27 @@
-/*----------------------------------------------------------------------------*/
-/* Copyright (c) 2017-2018 FIRST. All Rights Reserved.                        */
-/* Open Source Software - may be modified and shared by FRC teams. The code   */
-/* must be accompanied by the FIRST BSD license file in the root directory of */
-/* the project.                                                               */
-/*----------------------------------------------------------------------------*/
-
 #pragma once
 
-#include <string>
-
-#include <frc/TimedRobot.h>
-#include <frc/smartdashboard/SendableChooser.h>
-#include <frc/drive/DifferentialDrive.h>
 #include <frc/Spark.h>
 #include <frc/Joystick.h>
+#include <frc/TimedRobot.h>
 #include <frc/SpeedControllerGroup.h>
+#include <frc/drive/DifferentialDrive.h>
 
 class Robot : public frc::TimedRobot {
  public:
-  void RobotInit() override;
-  void RobotPeriodic() override;
-  void AutonomousInit() override;
-  void AutonomousPeriodic() override;
-  void TeleopInit() override;
-  void TeleopPeriodic() override;
-  void TestPeriodic() override;
+
+  /*These "overrides" are the different functions (Perhaps call them hooks) 
+   *that the robot looks for when it runs. Each one is run at different 
+   *points during the robots operation.*/
+  void RobotInit() override; //Runs *once* when the robot starts up
+  void TeleopPeriodic() override; //Run when the robot is in teleop or the "user operated" portion of the competition
 
  private:
   //Drive system control is done throught the driveSystem object
   frc::DifferentialDrive* driveSystem;
   
+  //Joystick obj that takes input from a controller so that we can move the robot around manually
+  frc::Joystick* stick;
+
   //Drive system motors are only controlled through the SpeedController class, they *can* be set manually but shouldn't.
   frc::Spark* leftDriveM;
   frc::Spark* rightDriveM;
@@ -37,6 +29,4 @@ class Robot : public frc::TimedRobot {
   //Motors are controlled through a speedController class, which can utilize PID control
   frc::SpeedControllerGroup* leftDriveT;
   frc::SpeedControllerGroup* rightDriveT;
-
-
 };
