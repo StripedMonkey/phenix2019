@@ -15,7 +15,6 @@ void Robot::RobotInit() {
     //Motors are controlled through a speedController class, which can utilize PID control
     leftDriveT = new frc::SpeedControllerGroup{*leftDriveM};
     rightDriveT = new frc::SpeedControllerGroup{*rightDriveM};
-
 }
 
 void Robot::TeleopPeriodic() {
